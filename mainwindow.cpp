@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->ssButton->setText("START");
 
     ui->goodBox->setMinimum(0);
-    ui->goodBox->setMaximum(5);
+    ui->goodBox->setMaximum(10);
     ui->badBox->setMinimum(0);
-    ui->badBox->setMaximum(5);
+    ui->badBox->setMaximum(10);
 
     connect(ui->missButton, SIGNAL(clicked()), this, SLOT(missButtonClicked()));
     connect(ui->ssButton, SIGNAL(clicked()), this, SLOT(ssButtonClicked()));
@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
 
     this->machineRunning = false;
+    this->readyForNextOrder = true;
 }
 
 MainWindow::~MainWindow()
@@ -75,7 +76,7 @@ void MainWindow::elapsedTime()
 
 void MainWindow::orderUpdateFromMES()
 {
-    if(this->machineRunning){
+    if(this->machineRunning && this->readyForNextOrder){
         auto future = std::async(std::launch::async, GetLineFromCin);
         auto line = future.get();
 
@@ -83,6 +84,7 @@ void MainWindow::orderUpdateFromMES()
             displayOrder(line);
             new_order = true;
         }
+        readyForNextOrder = false;
     }
 }
 
@@ -136,6 +138,7 @@ void MainWindow::goodButtonClicked()
         debounceTimer->start(1000);
         timerFlag = false;
         new_order = false;
+        readyForNextOrder = true;
     }
 }
 
@@ -158,9 +161,13 @@ void MainWindow::errorButtonClicked()
         ui->orderLabel->setText("Pending...");
         ui->partLabel->clear();
 
+        ui->badBox->setValue(0);
+        ui->goodBox->setValue(0);
+
         debounceTimer->start(1000);
         timerFlag = false;
         new_order = false;
+        readyForNextOrder = true;
     }
 }
 

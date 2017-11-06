@@ -49,6 +49,7 @@ class MainWindow : public QMainWindow
         bool machineRunning = false;
         bool new_order = false;
         bool firstPress = true;
+        bool readyForNextOrder = true;
 
         std::string currentOrderID;
         std::vector<std::string> currentPartIDs;

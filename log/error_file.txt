@@ -1,2 +1,39 @@
 ERROR FILE 15:28:20
 time,error_msg
+ERROR FILE 15:41:3
+time,error_msg
+15:41:6,missed_part
+15:41:24,system_start
+ERROR FILE 15:41:36
+time,error_msg
+15:42:5,system_start
+ERROR FILE 15:42:23
+time,error_msg
+15:42:27,system_start
+ERROR FILE 15:42:34
+time,error_msg
+ERROR FILE 15:42:46
+time,error_msg
+15:42:48,system_start
+ERROR FILE 15:47:17
+time,error_msg
+15:47:19,system_start
+ERROR FILE 15:48:24
+time,error_msg
+15:48:35,system_start
+15:48:41,system_stop
+15:48:48,system_start
+ERROR FILE 15:50:16
+time,error_msg
+ERROR FILE 15:51:18
+time,error_msg
+15:51:21,system_start
+15:51:28,sadsdafsadfafs
+15:51:29,missed_part
+15:52:37,missed_part
+ERROR FILE 15:54:21
+time,error_msg
+15:54:35,system_start
+ERROR FILE 15:56:45
+time,error_msg
+15:56:47,system_start

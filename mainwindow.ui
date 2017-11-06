@@ -268,7 +268,7 @@
      <rect>
       <x>410</x>
       <y>560</y>
-      <width>391</width>
+      <width>371</width>
       <height>101</height>
      </rect>
     </property>
@@ -285,10 +285,10 @@
    <widget class="QLabel" name="goodLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>500</y>
-      <width>81</width>
-      <height>41</height>
+      <width>91</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -304,9 +304,9 @@
    <widget class="QLabel" name="badLabel">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>500</y>
-      <width>91</width>
+      <width>81</width>
       <height>51</height>
      </rect>
     </property>
@@ -361,7 +361,7 @@
    <widget class="QSpinBox" name="goodBox">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>100</x>
       <y>500</y>
       <width>101</width>
       <height>51</height>
