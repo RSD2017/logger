@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in {0..50}; do	
+echo $i":"$(((RANDOM%100 )+1))","$(((RANDOM%2)))":"$(((RANDOM%100)+1))","$(((RANDOM%2)))":"$(((RANDOM%100 )+1))","$(((RANDOM%2)))":"$(((RANDOM%100 )+1))","$(((RANDOM%2)))":"$(((RANDOM%100 )+1))","$(((RANDOM%2)));
+done
