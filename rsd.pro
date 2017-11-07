@@ -18,9 +18,11 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
             mainwindow.cpp\
+            myThread.cpp\
             logger.cpp
 
 HEADERS  += mainwindow.h \
+            myThread.hpp \
             logger.h
 
 FORMS    += mainwindow.ui

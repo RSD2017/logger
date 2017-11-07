@@ -1,13 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMutex>
+#include "myThread.hpp"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     logg(new logger)
 {
-   // QTimer::singleShot(20, this, SLOT(showFullScreen()));
-
     debounceTimer = new QTimer(this);
     orderTimer = new QTimer(this);
     timer = new QTimer(this);
@@ -15,9 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(1000);
     orderTimer->start(2000);
 
+    QMutex mutex;
+    std::string buffer;
+    QThread* thread = new QThread;
+    myThread* worker = new myThread( &mutex, &buffer );
+    worker->moveToThread(thread);
+    thread->start();
+
     ui->setupUi(this);
-    //ui->staticOrderLabel->setText("Order:");
-    //ui->staticPartLabel->setText("Part:");
     ui->orderLabel->setText("Pending...");
     ui->partLabel->clear();
     ui->ssButton->setText("START");
@@ -35,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(debounceTimer, SIGNAL(timeout()), this, SLOT(clearTimerFlag()));
     connect(orderTimer, SIGNAL(timeout()), this, SLOT(orderUpdateFromMES()));
     connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
+    // connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
+    connect(timer, SIGNAL(timeout()), worker, SLOT(process()));
 
     this->machineRunning = false;
     this->readyForNextOrder = true;
@@ -48,12 +56,6 @@ MainWindow::~MainWindow()
 void MainWindow::clearTimerFlag()
 {
     timerFlag = true;
-}
-
-std::string GetLineFromCin() {
-    std::string line;
-    std::getline(std::cin, line);
-    return line;
 }
 
 void MainWindow::elapsedTime()
@@ -73,6 +75,11 @@ void MainWindow::elapsedTime()
     timer->start(1000);
 }
 
+std::string GetLineFromCin() {
+    std::string line;
+    std::getline(std::cin, line);
+    return line;
+}
 
 void MainWindow::orderUpdateFromMES()
 {

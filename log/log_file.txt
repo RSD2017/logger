@@ -71,3 +71,84 @@ time,order_id,type,parts_id
 LOG FILE 15:56:45
 time,order_id,type,parts_id
 15:56:50,0,0,23,0,12,0,52,0,64,1,13,1,No parts
+LOG FILE 9:48:26
+time,order_id,type,parts_id
+LOG FILE 9:56:59
+time,order_id,type,parts_id
+LOG FILE 9:58:40
+time,order_id,type,parts_id
+LOG FILE 10:7:54
+time,order_id,type,parts_id
+LOG FILE 10:8:7
+time,order_id,type,parts_id
+LOG FILE 10:13:31
+time,order_id,type,parts_id
+10:13:46,0,0,89,0,84,0,52,1,31,1,100,1,No parts
+10:13:48,1,1,49,0,65,1,41,0,59,0,93,1
+10:13:50,2,0,21,0,13,1,63,1,47,0,41,1,No parts
+LOG FILE 10:16:23
+time,order_id,type,parts_id
+LOG FILE 10:17:14
+time,order_id,type,parts_id
+LOG FILE 10:24:35
+time,order_id,type,parts_id
+10:24:45,0,1,5,0,10,1,35,1,80,0,46,0
+10:24:47,1,1,9,1,67,1,62,1,32,1,33,1
+10:24:49,2,1,86,0,5,1,2,1,89,1,81,1
+10:24:51,3,1,13,0,65,0,56,1,11,1,50,1
+LOG FILE 10:25:19
+time,order_id,type,parts_id
+10:25:45,23,1,8,1,17,1,20,0,65,0,78,1
+10:25:47,28,1,44,1,40,1,94,1,14,1,54,0
+LOG FILE 11:6:53
+time,order_id,type,parts_id
+LOG FILE 11:21:51
+time,order_id,type,parts_id
+LOG FILE 11:22:5
+time,order_id,type,parts_id
+LOG FILE 11:22:13
+time,order_id,type,parts_id
+LOG FILE 11:22:23
+time,order_id,type,parts_id
+LOG FILE 11:22:33
+time,order_id,type,parts_id
+LOG FILE 11:24:16
+time,order_id,type,parts_id
+LOG FILE 11:24:58
+time,order_id,type,parts_id
+LOG FILE 11:25:10
+time,order_id,type,parts_id
+LOG FILE 11:25:19
+time,order_id,type,parts_id
+LOG FILE 11:26:15
+time,order_id,type,parts_id
+LOG FILE 11:26:27
+time,order_id,type,parts_id
+LOG FILE 11:26:40
+time,order_id,type,parts_id
+LOG FILE 11:26:54
+time,order_id,type,parts_id
+LOG FILE 11:27:52
+time,order_id,type,parts_id
+LOG FILE 11:27:59
+time,order_id,type,parts_id
+LOG FILE 11:28:12
+time,order_id,type,parts_id
+LOG FILE 11:28:19
+time,order_id,type,parts_id
+LOG FILE 11:28:52
+time,order_id,type,parts_id
+LOG FILE 11:29:28
+time,order_id,type,parts_id
+LOG FILE 11:29:54
+time,order_id,type,parts_id
+LOG FILE 11:33:12
+time,order_id,type,parts_id
+LOG FILE 11:33:46
+time,order_id,type,parts_id
+LOG FILE 11:34:46
+time,order_id,type,parts_id
+LOG FILE 11:36:3
+time,order_id,type,parts_id
+LOG FILE 11:36:24
+time,order_id,type,parts_id
