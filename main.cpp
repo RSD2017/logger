@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "mainwindow.h"
-#include "myThread.hpp"
 
 int main(int argc, char *argv[])
 {

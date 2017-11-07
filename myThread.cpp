@@ -1,6 +1,6 @@
 #include "myThread.hpp"
 
-myThread::myThread( QMutex* _mutex, std::string *_buffer )
+myThread::myThread( QMutex* _mutex, std::vector<std::string> *_buffer )
 {
     this->mutex = _mutex;
     this->buffer = _buffer;
@@ -9,7 +9,7 @@ myThread::myThread( QMutex* _mutex, std::string *_buffer )
 myThread::~myThread() {
 }
 
-std::string FISKGetLineFromCin() {
+std::string GetLineFromCin() {
     std::string line;
     std::getline(std::cin, line);
     return line;
@@ -17,14 +17,14 @@ std::string FISKGetLineFromCin() {
 
 void myThread::process()
 {
-    auto future = std::async(std::launch::async, FISKGetLineFromCin);
-    auto line = future.get();
+    auto future = std::async(std::launch::async, GetLineFromCin);
+    std::string line = future.get();
     if (!line.empty()) {
-        std::cout << "Message: " << line << '\n';
         mutex->lock(); // To avoid collision
         usleep(10);
-        (*buffer) = line;
+        (*buffer).push_back( line );
         mutex->unlock(); // Let's release the lock
         usleep(1);
+        emit newOrder();
     }
 }

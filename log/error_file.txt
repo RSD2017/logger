@@ -117,3 +117,69 @@ ERROR FILE 11:36:3
 time,error_msg
 ERROR FILE 11:36:24
 time,error_msg
+ERROR FILE 12:31:52
+time,error_msg
+ERROR FILE 12:42:9
+time,error_msg
+ERROR FILE 12:43:0
+time,error_msg
+ERROR FILE 12:43:37
+time,error_msg
+ERROR FILE 12:44:9
+time,error_msg
+ERROR FILE 12:45:2
+time,error_msg
+ERROR FILE 12:45:17
+time,error_msg
+ERROR FILE 12:49:33
+time,error_msg
+ERROR FILE 12:57:1
+time,error_msg
+ERROR FILE 13:3:50
+time,error_msg
+ERROR FILE 13:6:26
+time,error_msg
+ERROR FILE 13:7:7
+time,error_msg
+ERROR FILE 13:7:56
+time,error_msg
+ERROR FILE 13:9:23
+time,error_msg
+ERROR FILE 13:10:5
+time,error_msg
+ERROR FILE 13:10:58
+time,error_msg
+ERROR FILE 13:11:9
+time,error_msg
+ERROR FILE 13:12:12
+time,error_msg
+ERROR FILE 13:12:47
+time,error_msg
+ERROR FILE 13:13:36
+time,error_msg
+ERROR FILE 13:15:31
+time,error_msg
+13:15:48,system_start
+13:15:56,system_stop
+13:15:58,system_start
+13:15:59,system_stop
+ERROR FILE 13:18:3
+time,error_msg
+13:18:7,system_start
+13:18:22,missed_part
+13:18:25,system_stop
+ERROR FILE 13:19:4
+time,error_msg
+13:19:6,system_start
+13:19:32,system_stop
+ERROR FILE 13:20:34
+time,error_msg
+13:20:37,system_start
+13:21:4,system_stop
+ERROR FILE 13:21:18
+time,error_msg
+13:21:25,system_start
+ERROR FILE 13:22:57
+time,error_msg
+13:23:0,system_start
+13:23:9,system_stop

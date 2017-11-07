@@ -1,8 +1,7 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QMutex>
-#include "myThread.hpp"
 
+std::vector<std::string> buffer;
+QMutex mutex;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,17 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
     logg(new logger)
 {
     debounceTimer = new QTimer(this);
-    orderTimer = new QTimer(this);
     timer = new QTimer(this);
 
-    timer->start(1000);
-    orderTimer->start(2000);
+    timer->start(500);
 
-    QMutex mutex;
-    std::string buffer;
     QThread* thread = new QThread;
-    myThread* worker = new myThread( &mutex, &buffer );
-    worker->moveToThread(thread);
+    myThread* bufferThread = new myThread( &mutex, &buffer );
+    bufferThread->moveToThread(thread);
     thread->start();
 
     ui->setupUi(this);
@@ -39,10 +34,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->errorButton, SIGNAL(clicked()), this, SLOT(errorButtonClicked()));
     connect(ui->customErrorButton, SIGNAL(clicked()), this, SLOT(customErrorCuttonClicked()));
     connect(debounceTimer, SIGNAL(timeout()), this, SLOT(clearTimerFlag()));
-    connect(orderTimer, SIGNAL(timeout()), this, SLOT(orderUpdateFromMES()));
     connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
-    // connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
-    connect(timer, SIGNAL(timeout()), worker, SLOT(process()));
+    connect(timer, SIGNAL(timeout()), bufferThread, SLOT(process()));
+    connect(bufferThread, SIGNAL(newOrder()), this, SLOT(orderUpdateFromMES()));
 
     this->machineRunning = false;
     this->readyForNextOrder = true;
@@ -75,23 +69,23 @@ void MainWindow::elapsedTime()
     timer->start(1000);
 }
 
-std::string GetLineFromCin() {
-    std::string line;
-    std::getline(std::cin, line);
-    return line;
-}
-
 void MainWindow::orderUpdateFromMES()
 {
     if(this->machineRunning && this->readyForNextOrder){
-        auto future = std::async(std::launch::async, GetLineFromCin);
-        auto line = future.get();
-
-        if (!line.empty()) {
-            displayOrder(line);
+        std::string order;
+        mutex.lock(); // To avoid collision
+        usleep(10);
+        if (!buffer.empty()) {
+            order = buffer.front();
+            buffer.erase(buffer.begin());
+        }
+        mutex.unlock(); // Let's release the lock
+        usleep(1);
+        if (!order.empty()) {
+            displayOrder( order );
+            readyForNextOrder = false;
             new_order = true;
         }
-        readyForNextOrder = false;
     }
 }
 

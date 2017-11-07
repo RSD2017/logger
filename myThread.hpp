@@ -13,7 +13,7 @@ class myThread : public QObject
     Q_OBJECT
 
     public:
-        myThread( QMutex* _mutex, std::string *_buffer );
+        myThread( QMutex* _mutex, std::vector<std::string> *_buffer );
         ~myThread();
 
     public slots:
@@ -22,5 +22,9 @@ class myThread : public QObject
 
     private:
         QMutex* mutex;
-        std::string *buffer;
+        std::vector<std::string> *buffer;
+
+    signals:
+        void newOrder();
+
 };

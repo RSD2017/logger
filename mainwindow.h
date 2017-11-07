@@ -1,15 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QElapsedTimer>
 #include <QMainWindow>
+#include <QMutex>
 #include <QTimer>
 
 #include <chrono>
 #include <future>
 
+#include "ui_mainwindow.h"
+#include "myThread.hpp"
 #include "logger.h"
-
-#include <QElapsedTimer>
 
 
 namespace Ui {

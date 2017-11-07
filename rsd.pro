@@ -14,7 +14,7 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -Wextra -Wno-unused-variable -Wno-unused-parameter
 QMAKE_CXXFLAGS_RELEASE += -o3
 
-CONFIG += c++11
+CONFIG += c++14
 
 SOURCES += main.cpp\
             mainwindow.cpp\
