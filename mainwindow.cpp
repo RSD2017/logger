@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     debounceTimer = new QTimer(this);
     timer = new QTimer(this);
 
-    timer->start(500);
+    timer->start(250);
 
     QThread* thread = new QThread;
     myThread* bufferThread = new myThread( &mutex, &buffer );
@@ -71,6 +71,7 @@ void MainWindow::elapsedTime()
 
 void MainWindow::orderUpdateFromMES()
 {
+    ui->missingLabel->setText(QString::number(buffer.size()));
     if( this->machineRunning && this->readyForNextOrder ){
         std::string order;
         mutex.lock(); // To avoid collision
