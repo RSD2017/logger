@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     debounceTimer = new QTimer(this);
     timer = new QTimer(this);
 
-    timer->start(500);
+    timer->start(250);
 
     QThread* thread = new QThread;
     myThread* bufferThread = new myThread( &mutex, &buffer );
@@ -71,6 +71,7 @@ void MainWindow::elapsedTime()
 
 void MainWindow::orderUpdateFromMES()
 {
+    ui->missingLabel->setText(QString::number(buffer.size()));
     if( this->machineRunning && this->readyForNextOrder ){
         std::string order;
         mutex.lock(); // To avoid collision
@@ -115,15 +116,16 @@ void MainWindow::displayOrder(std::string order){
     numberOfParts = parts.size();
 
     QString partLabel;
-    int i = 0;
+    int goodParts = 0, badParts = 0;
     for ( auto &part : parts ) {
         if(part.back() == '1'){
-            partLabel += QString::number(i) +  ": GOOD\n";
+            goodParts++;
         }else{
-            partLabel += QString::number(i) +  ": BAD\n";
+            badParts++;
         }
-        i++;
     }
+    partLabel += "GOOD: " + QString::number(goodParts) +  "\n";
+    partLabel += "BAD: " + QString::number(badParts) +  "\n";
     ui->partLabel->setText(partLabel);
     currentPartIDs = parts;
 }
@@ -147,7 +149,7 @@ void MainWindow::goodButtonClicked()
 
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_G)
+    if(event->key() == Qt::Key_Control)
     {
         goodButtonClicked();
     }
