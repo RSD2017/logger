@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(elapsedTime()));
     connect(timer, SIGNAL(timeout()), bufferThread, SLOT(process()));
     connect(bufferThread, SIGNAL(newOrder()), this, SLOT(orderUpdateFromMES()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(orderUpdateFromMES()));
 
     this->machineRunning = false;
     this->readyForNextOrder = true;
@@ -70,7 +71,7 @@ void MainWindow::elapsedTime()
 
 void MainWindow::orderUpdateFromMES()
 {
-    if(this->machineRunning && this->readyForNextOrder){
+    if( this->machineRunning && this->readyForNextOrder ){
         std::string order;
         mutex.lock(); // To avoid collision
         usleep(10);
