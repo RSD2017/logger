@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QMutex>
 #include <QTimer>
+#include <QKeyEvent>
 
 #include <chrono>
 #include <future>
@@ -33,8 +34,8 @@ class MainWindow : public QMainWindow
         void customErrorCuttonClicked();
         void clearTimerFlag();
         void orderUpdateFromMES();
-        void missButtonClicked();
         void elapsedTime();
+        void keyReleaseEvent(QKeyEvent *);
 
         void displayOrder(std::string);
 
@@ -52,6 +53,7 @@ class MainWindow : public QMainWindow
         bool new_order = false;
         bool firstPress = true;
         bool readyForNextOrder = true;
+        int numberOfParts = 0;
 
         std::string currentOrderID;
         std::vector<std::string> currentPartIDs;

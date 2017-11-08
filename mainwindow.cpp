@@ -28,7 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->badBox->setMinimum(0);
     ui->badBox->setMaximum(10);
 
-    connect(ui->missButton, SIGNAL(clicked()), this, SLOT(missButtonClicked()));
     connect(ui->ssButton, SIGNAL(clicked()), this, SLOT(ssButtonClicked()));
     connect(ui->goodButton, SIGNAL(clicked()), this, SLOT(goodButtonClicked()));
     connect(ui->errorButton, SIGNAL(clicked()), this, SLOT(errorButtonClicked()));
@@ -112,6 +111,8 @@ void MainWindow::displayOrder(std::string order){
     }
     parts.push_back( order );
 
+    numberOfParts = parts.size();
+
     QString partLabel;
     int i = 0;
     for ( auto &part : parts ) {
@@ -128,7 +129,7 @@ void MainWindow::displayOrder(std::string order){
 
 void MainWindow::goodButtonClicked()
 {
-    if (timerFlag && new_order)
+    if ( timerFlag && new_order )
     {
         logg->log_order_ok(currentOrderID, true, currentPartIDs);
 
@@ -143,18 +144,37 @@ void MainWindow::goodButtonClicked()
     }
 }
 
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_G)
+    {
+        goodButtonClicked();
+    }
+}
+
 void MainWindow::errorButtonClicked()
 {
     if (timerFlag && new_order)
     {
-        std::string error_msg = ui->errorBox->currentText().toUtf8().constData();
+        std::string error_msg;
 
-        if (error_msg.compare(0, 3, "Too") == 0) {
-            std::string goodCount = ui->goodBox->text().toUtf8().constData();
-            std::string badCount = ui->badBox->text().toUtf8().constData();
-            error_msg += " (OK=" + goodCount + ", " + "NG=" + badCount + ")";
+        int goodParts = std::stoi(ui->goodBox->text().toUtf8().constData());
+        int badParts = std::stoi(ui->badBox->text().toUtf8().constData());
+
+        if ( numberOfParts == 0 ) {
+            error_msg += "no parts";
+        } else if ( numberOfParts < goodParts + badParts ) {
+            error_msg += "too few parts";
+        } else if ( numberOfParts > goodParts + badParts ) {
+            error_msg += "too many parts";
+        } else {
+            error_msg += "right amount, wrong parts";
         }
 
+        std::string goodCount = ui->goodBox->text().toUtf8().constData();
+        std::string badCount = ui->badBox->text().toUtf8().constData();
+
+        error_msg += " (OK=" + goodCount + ", " + "NG=" + badCount + ")";
 
         logg->log_order_ng(currentOrderID, false, currentPartIDs, error_msg);
 
@@ -185,18 +205,6 @@ void MainWindow::customErrorCuttonClicked()
             debounceTimer->start(1000);
             timerFlag = false;
         }
-    }
-}
-
-void MainWindow::missButtonClicked()
-{
-    if (timerFlag)
-    {
-        std::string error_msg = "missed_part";
-        logg->log_additonal_error(error_msg);
-
-        debounceTimer->start(1000);
-        timerFlag = false;
     }
 }
 
