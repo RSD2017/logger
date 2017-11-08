@@ -163,9 +163,9 @@ void MainWindow::errorButtonClicked()
 
         if ( numberOfParts == 0 ) {
             error_msg += "no parts";
-        } else if ( numberOfParts < goodParts + badParts ) {
-            error_msg += "too few parts";
         } else if ( numberOfParts > goodParts + badParts ) {
+            error_msg += "too few parts";
+        } else if ( numberOfParts < goodParts + badParts ) {
             error_msg += "too many parts";
         } else {
             error_msg += "right amount, wrong parts";
