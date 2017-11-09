@@ -1,0 +1,4 @@
+#!/bin/bash
+tar cvzf "/home/mneerup/RSDLogs/$(date '+%Y-%m-%d.%H:%M:%S').tar.gz" /home/mneerup/SDU/Skole/9.Semester/RSD/logger/log/error_file.txt /home/mneerup/SDU/Skole/9.Semester/RSD/logger/log/log_file.txt /tmp/log /home/mneerup/SDU/Skole/9.Semester/RSD/MiniMES/src/orders_autosave.txt /home/mneerup/SDU/Skole/9.Semester/RSD/MiniMES/src/parts_autosave.txt /home/mneerup/SDU/Skole/9.Semester/RSD/MiniMES/src/orders.txt
+mv /home/mneerup/SDU/Skole/9.Semester/RSD/logger/log/error_file.txt /home/mneerup/RSDLogs/error_file-$(date '+%Y-%m-%d.%H:%M:%S')
+mv /home/mneerup/SDU/Skole/9.Semester/RSD/logger/log/log_file.txt /home/mneerup/RSDLogs/log_file-$(date '+%Y-%m-%d.%H:%M:%S')
